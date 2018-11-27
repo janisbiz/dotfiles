@@ -142,7 +142,7 @@ font pango:monospace 8
 
 set $ws1 1:Random
 set $ws2 2:WEB
-set $ws3 3:PStorm
+set $ws3 3:DEV
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -172,7 +172,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+l exec i3lock -c FF69B4
 
 exec_always --no-startup-id setxkbmap lv apostrophe
-exec_always --no-startup-id ~/.config/i3/screen_layout.sh
+# exec_always --no-startup-id ~/.config/i3/screen_layout.sh
 exec_always --no-startup-id ~/gd.sh
 
 exec_always --no-startup-id ssh-add ~/.ssh/janis.bizkovskis\@lesara.de
@@ -182,6 +182,11 @@ exec --no-startup-id gnome-settings-daemon
 workspace $ws1 output eDP-1-1
 workspace $ws2 output HDMI-1-1
 workspace $ws3 output DVI-I-2-1
+
+# Fallback to default screen of VGA-1 (home computer)
+workspace $ws1 output VGA-1
+workspace $ws2 output VGA-1
+workspace $ws3 output VGA-1
 
 bindsym $mod+End exec --no-startup-id "i3lock -c 000000 && sudo pm-suspend"
 
