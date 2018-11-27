@@ -8,11 +8,11 @@ confirm_install() {
     esac
 }
 
-install() {
+install_dotfiles() {
     source .env;
 
-    rsync -vr ${DOTDIR} ~/ | sed -e "s#$(basename $DOTDIR)#~#g"
+    rsync -vr ${DOTDIR}/ ~/ | sed -e "s#$(basename $DOTDIR)#~#g"
 }
 
 confirm_install
-install
+install_dotfiles
