@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# based on: https://gist.github.com/dmytro/3984680
+
+ssh_multi() {
+  if [ -z "$HOSTS" ]; then
+     echo -n "Please provide a list of hosts separated by spaces [ENTER]: "
+     read -r HOSTS
+  fi
+
+  if [ -z "$TMUX" ]; then
+    tmux new-session "$0 $HOSTS"
+    exit
+  fi
+
+  local hosts=( $HOSTS )
+
+  tmux new-window "ssh ${hosts[0]}"
+  unset hosts[0];
+
+  for i in "${hosts[@]}"; do
+    tmux split-window -h  "ssh $i"
+    tmux select-layout tiled > /dev/null
+  done
+
+  tmux select-pane -t 0
+  tmux set-window-option synchronize-panes on > /dev/null
+}
+
+if [ "$1" = "-f" ]; then
+  HOSTS="$(tr "\n" " " < "$2")"
+else
+  HOSTS=${HOSTS:=$*}
+fi
+
+ssh_multi
