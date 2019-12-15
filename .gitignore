@@ -1,2 +1,5 @@
 # Misc
 /.idea
+
+# *.save from nano editor
+*.save
