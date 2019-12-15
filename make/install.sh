@@ -13,7 +13,7 @@ install_dotfiles() {
 
     rsync -vr ${DOTDIR}/ ~/ | sed -e "s#$(basename $DOTDIR)#~#g"
 
-    sudo ln -s ~/.config/janisbiz/scripts/* /usr/bin/
+    sudo ln -sf ~/.config/janisbiz/scripts/* /usr/bin/
 }
 
 confirm_install
