@@ -174,13 +174,15 @@ exec_always --no-startup-id mount-google-drive-ocamlfuse
 exec --no-startup-id gnome-settings-daemon
 
 workspace $ws1 output eDP-1-1
-workspace $ws2 output HDMI-1-1
-workspace $ws3 output DVI-I-2-1
+workspace $ws2 output HDMI-1
+workspace $ws3 output HDMI-1
+
+bindsym $mod+m exec "xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off"
 
 # Fallback to default screen of VGA-1 (home computer)
-workspace $ws1 output VGA-1
-workspace $ws2 output VGA-1
-workspace $ws3 output VGA-1
+# workspace $ws1 output VGA-1
+# workspace $ws2 output VGA-1
+# workspace $ws3 output VGA-1
 
 bindsym $mod+End exec --no-startup-id "i3lock -c 000000 && systemctl hibernate"
 
