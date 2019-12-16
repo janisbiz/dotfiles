@@ -168,7 +168,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+l exec i3lock -c 000000
 
 exec_always --no-startup-id setxkbmap lv apostrophe
-exec_always --no-startup-id ~/.config/i3/screen_layout.sh
+exec_always --no-startup-id ~/.config/i3/screen_layout_work_myt.sh
 exec_always --no-startup-id mount-google-drive-ocamlfuse
 
 exec --no-startup-id gnome-settings-daemon
