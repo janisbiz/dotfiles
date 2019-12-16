@@ -5,33 +5,37 @@ MUTE=`pactl list sinks | grep $'^\tMute:' | sed -e 's/.*\:\s\(.*\)/\1/'`;
 
 up() {
     if [ "$MUTE" == "yes" ]; then
-        pactl set-sink-mute 0 toggle
+        pactl set-sink-mute 0 toggle;
     fi
 
     if [ "$VOLUME" -lt "100" ]; then
         pactl -- set-sink-volume 0 +5%;
         notify-send -t 500 "Volume: $((VOLUME + 5))";
     else
-        notify-send -t 500 "Volume: ${VOLUME}"
+        notify-send -t 500 "Volume: ${VOLUME}";
     fi
 }
 
 down() {
     if [ "$MUTE" == "yes" ]; then
-        pactl set-sink-mute 0 toggle
+        pactl set-sink-mute 0 toggle;
     fi
 
     if [ "$VOLUME" -gt "0" ]; then
         pactl -- set-sink-volume 0 -5%;
         notify-send -t 500 "Volume: $((VOLUME - 5))";
     else
-        notify-send -t 500 "Volume: ${VOLUME}"
+        notify-send -t 500 "Volume: ${VOLUME}";
     fi
 }
 
 mute() {
     pactl set-sink-mute 0 toggle
-    notify-send -t 500 "Mute: ${MUTE}"
+    if [ "$MUTE" == "yes" ]; then
+        notify-send -t 500 "Mute: no"
+    else
+        notify-send -t 500 "Mute: yes"
+    fi
 }
 
 case $1 in
