@@ -1,0 +1,3 @@
+#!/bin/bash
+
+for display in $(xrandr | grep '^\(DP.*\|HDMI.*\) connected' | head | awk '{ print $1 }'); do xrandr --output $display --off; done

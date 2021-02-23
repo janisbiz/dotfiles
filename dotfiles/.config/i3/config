@@ -165,34 +165,29 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-bindsym $mod+l exec i3lock -c 000000
+bindsym $mod+l exec janisbiz-i3wm-lock
 
 exec_always --no-startup-id setxkbmap lv apostrophe
-exec_always --no-startup-id ~/.config/i3/screen_layout_work_myt.sh
-exec_always --no-startup-id mount-google-drive-ocamlfuse
+exec_always --no-startup-id ~/.config/i3/screen_layout_work_myt_home.sh
+exec_always --no-startup-id janisbiz-mount-google-drive-ocamlfuse
 
 exec --no-startup-id gnome-settings-daemon
 
 workspace $ws1 output eDP-1-1
-workspace $ws2 output HDMI-1
-workspace $ws3 output HDMI-1
+workspace $ws2 output DP-1 HDMI-1 eDP-1-1
+workspace $ws3 output DP-1 HDMI-1 eDP-1-1
 
-bindsym $mod+m exec "xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off"
+bindsym $mod+m exec janisbiz-display-off
 
-# Fallback to default screen of VGA-1 (home computer)
-# workspace $ws1 output VGA-1
-# workspace $ws2 output VGA-1
-# workspace $ws3 output VGA-1
-
-bindsym $mod+End exec --no-startup-id "i3lock -c 000000 && systemctl hibernate"
+bindsym $mod+End exec --no-startup-id janisbiz-i3wm-suspend
 
 # Shit
 exec_always --no-startup-id xcompmgr
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id "i3wm-volume-ctl up"
-bindsym XF86AudioLowerVolume exec --no-startup-id "i3wm-volume-ctl down"
-bindsym XF86AudioMute exec --no-startup-id"i3wm-volume-ctl mute"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "janisbiz-i3wm-volume-ctl up"
+bindsym XF86AudioLowerVolume exec --no-startup-id "janisbiz-i3wm-volume-ctl down"
+bindsym XF86AudioMute exec --no-startup-id "janisbiz-i3wm-volume-ctl mute"
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
