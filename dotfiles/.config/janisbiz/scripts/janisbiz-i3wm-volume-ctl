@@ -2,15 +2,21 @@
 
 VOLUME=`pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's/.* \([0-9][0-9]*\)%.*/\1/'`;
 MUTE=`pactl list sinks | grep $'^\tMute:' | sed -e 's/.*\:\s\(.*\)/\1/'`;
-SINK=`pactl list sinks | grep -oP '^Sink[[:space:]]#(\d+)' | sed -n "s/^Sink\s#\([[:digit:]]\+\).*$/\1/p"`
+SINKS=`pactl list sinks | grep -oP '^Sink[[:space:]]#(\d+)' | sed -n "s/^Sink\s#\([[:digit:]]\+\).*$/\1/p"`
 
 up() {
     if [ "$MUTE" == "yes" ]; then
-        pactl set-sink-mute $SINK toggle;
+        for sink_index in $SINKS;
+        do
+            pactl set-sink-mute $sink_index toggle;
+        done
     fi
 
     if [ "$VOLUME" -lt "100" ]; then
-        pactl -- set-sink-volume $SINK +5%;
+        for sink_index in $SINKS;
+        do
+            pactl -- set-sink-volume $sink_index +5%;
+        done
         notify-send -t 500 "Volume: $((VOLUME + 5))";
     else
         notify-send -t 500 "Volume: ${VOLUME}";
@@ -19,11 +25,17 @@ up() {
 
 down() {
     if [ "$MUTE" == "yes" ]; then
-        pactl set-sink-mute $SINK toggle;
+        for sink_index in $SINKS;
+        do
+            pactl set-sink-mute $sink_index toggle;
+        done
     fi
 
     if [ "$VOLUME" -gt "0" ]; then
-        pactl -- set-sink-volume $SINK -5%;
+        for sink_index in $SINKS;
+        do
+            pactl -- set-sink-volume $sink_index -5%;
+        done
         notify-send -t 500 "Volume: $((VOLUME - 5))";
     else
         notify-send -t 500 "Volume: ${VOLUME}";
@@ -31,7 +43,10 @@ down() {
 }
 
 mute() {
-    pactl set-sink-mute $SINK toggle
+    for sink_index in $SINKS;
+    do
+        pactl set-sink-mute $sink_index toggle
+    done
     if [ "$MUTE" == "yes" ]; then
         notify-send -t 500 "Mute: no"
     else
