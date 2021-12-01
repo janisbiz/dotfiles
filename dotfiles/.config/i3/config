@@ -170,6 +170,7 @@ bindsym $mod+l exec janisbiz-i3wm-lock
 exec_always --no-startup-id setxkbmap lv apostrophe
 exec_always --no-startup-id ~/.config/i3/screen_layout_work_myt_home.sh
 exec_always --no-startup-id janisbiz-mount-google-drive-ocamlfuse
+exec_always --no-startup-id janisbiz-i3wm-disable-screensaver
 
 exec --no-startup-id gnome-settings-daemon
 
