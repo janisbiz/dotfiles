@@ -2,6 +2,8 @@
 
 if [[ ! -d ~/Google\ Drive ]]; then
     mkdir -p ~/Google\ Drive
+else
+    fusermount -uz ~/Google\ Drive
 fi
 
 google-drive-ocamlfuse mountpoint ~/Google\ Drive
