@@ -166,17 +166,18 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+l exec janisbiz-i3wm-lock
+bindsym $mod+Shift+s exec --no-startup-id ~/.config/i3/screen_layout_work_disable.sh
 
 exec_always --no-startup-id setxkbmap lv apostrophe
-exec_always --no-startup-id ~/.config/i3/screen_layout_work_myt_home.sh
+exec_always --no-startup-id ~/.config/i3/screen_layout_work.sh
 exec_always --no-startup-id janisbiz-mount-google-drive-ocamlfuse
 exec_always --no-startup-id janisbiz-i3wm-disable-screensaver
 
 exec --no-startup-id gnome-settings-daemon
 
 workspace $ws1 output eDP-1-1
-workspace $ws2 output DP-1 HDMI-1 eDP-1-1
-workspace $ws3 output DP-1 HDMI-1 eDP-1-1
+workspace $ws2 output DP-1 HDMI-1 eDP-1-1 DisplayPort-2
+workspace $ws3 output DP-1 HDMI-1 eDP-1-1 DisplayPort-3
 
 bindsym $mod+m exec janisbiz-display-off
 
