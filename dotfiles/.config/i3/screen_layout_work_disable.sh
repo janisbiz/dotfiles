@@ -1,2 +1,9 @@
-#!/bin/sh
-xrandr --output eDP --primary --mode 1920x1080 --pos 1594x1440 --rotate normal --output HDMI-A-0 --off --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --off --output DisplayPort-3 --off
+#!/bin/bash
+xrandr --output eDP --primary --mode 1920x1080 --pos 1594x1440 --rotate normal;
+xrandr --output HDMI-A-0 --off;
+
+dps=(`xrandr | grep --color=never '^DisplayPort-[0-9]' | sed -e 's/\(DisplayPort-[[:digit:]]*\).*/\1/'`);
+for dp in ${dps[@]}
+do
+	xrandr --output $dp --off;
+done

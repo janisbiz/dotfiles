@@ -1,9 +1,12 @@
 #!/bin/bash
+set -x
+folder=~/Google\ Drive
 
-if [[ ! -d ~/Google\ Drive ]]; then
-    mkdir -p ~/Google\ Drive
+if [[ -d "$folder" ]]; then
+    fusermount -uz "$folder"
+    rm -rf "$folder"
 else
-    fusermount -uz ~/Google\ Drive
+    mkdir -p "$folder"
 fi
 
-google-drive-ocamlfuse mountpoint ~/Google\ Drive
+google-drive-ocamlfuse mountpoint "$folder"
